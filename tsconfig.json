@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "lib": ["dom", "es2015", "es2015.generator"],
+    "target": "es2015",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "dist",
+    "declaration": true,
+    "rootDir": "src",
+    "resolveJsonModule": false
+  },
+  // "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
