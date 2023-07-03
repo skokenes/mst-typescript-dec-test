@@ -3,37 +3,41 @@ import {
   IModelType,
   Instance,
   _NotCustomized,
-  ISimpleType
+  ISimpleType,
 } from "mobx-state-tree";
 
-export const ModelA = t.model({
+const ModelAInferred = t.model({
   foo: t.string
 });
 
-export type ModelAStoreType = Instance<typeof ModelA>;
-export interface IModelAStore extends ModelAStoreType {}
 
-// Typical MST usage with inferred type
-export const ModelB = t.model({
+type ModelAFactoryType = typeof ModelAInferred;
+interface ModelAFactoryInterface extends ModelAFactoryType {}
+export const ModelA: ModelAFactoryInterface = ModelAInferred;
+export interface IModelAStore extends Instance<ModelAFactoryInterface> {}
+
+const ModelBInferred = t.model({
   a: ModelA
 });
 
-export type ModelBStoreType = Instance<typeof ModelB>;
-export interface IModelBStore extends ModelBStoreType {}
+type ModelBFactoryType = typeof ModelBInferred;
+interface ModelBFactoryInterface extends ModelBFactoryType {}
+export const ModelB: ModelBFactoryInterface = ModelBInferred;
+export interface IModelBStore extends Instance<ModelBFactoryInterface> {}
 
-// Hardcode the typing to reuse the ModelA type
-type HardCodedModelType = IModelType<
-  {
-    a: typeof ModelA;
-  },
-  {},
-  _NotCustomized,
-  _NotCustomized
->;
-
-export const ModelC: HardCodedModelType = t.model({
-  a: ModelA
+const ModelCInferred = t.model({
+  // using that will create another declaration!
+  // b: ModelBInferred
+  b: ModelB
 });
+type ModelCFactoryType = typeof ModelCInferred;
+interface ModelCFactoryInterface extends ModelCFactoryType {}
+export const ModelC: ModelCFactoryInterface = ModelCInferred; 
+export interface IModelCStore extends Instance<ModelCFactoryInterface> {}
 
-export type ModelCStoreType = Instance<typeof ModelC>;
-export interface IModelCStore extends ModelCStoreType {}
+const ModelDInferred = t.compose(ModelC, ModelA);
+
+type ModelDFactoryType = typeof ModelDInferred;
+interface ModelDFactoryInterface extends ModelDFactoryType {}
+export const ModelD: ModelDFactoryInterface = ModelDInferred; 
+export interface IModelDStore extends Instance<ModelDFactoryInterface> {}

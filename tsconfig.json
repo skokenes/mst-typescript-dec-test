@@ -2,14 +2,16 @@
   "compilerOptions": {
     "module": "commonjs",
     "esModuleInterop": true,
-    "lib": ["dom", "es2015", "es2015.generator"],
-    "target": "es2015",
+    "lib": ["ESNext"],
+    "target": "ESNext",
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "dist",
     "declaration": true,
     "rootDir": "src",
-    "resolveJsonModule": false
+    "resolveJsonModule": false,
+    "emitDeclarationOnly": true,
+    "types": []
   },
   // "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
