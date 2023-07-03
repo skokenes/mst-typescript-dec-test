@@ -3,7 +3,7 @@ import {
   IModelType,
   Instance,
   _NotCustomized,
-  ISimpleType
+  ISimpleType,
 } from "mobx-state-tree";
 
 const ModelAInferred = t.model({
@@ -34,3 +34,10 @@ type ModelCFactoryType = typeof ModelCInferred;
 interface ModelCFactoryInterface extends ModelCFactoryType {}
 export const ModelC: ModelCFactoryInterface = ModelCInferred; 
 export interface IModelCStore extends Instance<ModelCFactoryInterface> {}
+
+const ModelDInferred = t.compose(ModelC, ModelA);
+
+type ModelDFactoryType = typeof ModelDInferred;
+interface ModelDFactoryInterface extends ModelDFactoryType {}
+export const ModelD: ModelDFactoryInterface = ModelDInferred; 
+export interface IModelDStore extends Instance<ModelDFactoryInterface> {}
